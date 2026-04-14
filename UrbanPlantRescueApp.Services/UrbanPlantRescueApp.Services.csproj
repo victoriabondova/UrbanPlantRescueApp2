@@ -14,4 +14,8 @@
     <ProjectReference Include="..\UrbanPlantRescueApp.Data\UrbanPlantRescueApp.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>
