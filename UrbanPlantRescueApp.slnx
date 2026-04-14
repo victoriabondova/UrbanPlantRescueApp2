@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="UrbanPlantRescueApp.Data/UrbanPlantRescueApp.Data.csproj" />
+  <Project Path="UrbanPlantRescueApp.Services/UrbanPlantRescueApp.Services.csproj" />
+  <Project Path="UrbanPlantRescueApp.Web/UrbanPlantRescueApp.Web.csproj" />
+</Solution>
