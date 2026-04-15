@@ -1,6 +1,68 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Политика за поверителност";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="text-center mb-5">
+                <i class="bi bi-shield-lock text-success display-1"></i>
+                <h1 class="fw-bold mt-3">Политика за поверителност</h1>
+                <p class="text-muted">Последна актуализация: @DateTime.Now.ToString("dd.MM.yyyy")</p>
+                <hr class="w-25 mx-auto text-success" style="height: 3px;">
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+                
+                <section class="mb-5">
+                    <h4 class="fw-bold text-dark"><i class="bi bi-person-check me-2 text-success"></i> 1. Информация, която събираме</h4>
+                    <p class="text-secondary">За функционирането на <strong>Urban Plant Rescue App</strong>, ние събираме минимално количество данни, предоставени доброволно от Вас при регистрация:</p>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent border-0 ps-0"><i class="bi bi-check2-circle me-2 text-success"></i> Имейл адрес (за идентификация и достъп).</li>
+                        <li class="list-group-item bg-transparent border-0 ps-0"><i class="bi bi-check2-circle me-2 text-success"></i> Потребителско име (за визуализация при заявки).</li>
+                        <li class="list-group-item bg-transparent border-0 ps-0"><i class="bi bi-check2-circle me-2 text-success"></i> Информация за добавени растения и снимки.</li>
+                    </ul>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="fw-bold text-dark"><i class="bi bi-gear-fill me-2 text-success"></i> 2. Как използваме Вашите данни</h4>
+                    <p class="text-secondary">Данните се използват единствено за нуждите на приложението:</p>
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100 border-start border-success border-4">
+                                <h6 class="fw-bold mb-1">Заявки за спасяване</h6>
+                                <p class="small text-muted mb-0">Свързване на потребители с растения в нужда.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded-3 h-100 border-start border-success border-4">
+                                <h6 class="fw-bold mb-1">Сигурност</h6>
+                                <p class="small text-muted mb-0">Защита на Вашия профил чрез ASP.NET Identity.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="mb-5">
+                    <h4 class="fw-bold text-dark"><i class="bi bi-eye-slash-fill me-2 text-success"></i> 3. Споделяне на данни</h4>
+                    <p class="text-secondary">Ние <strong>не продаваме</strong> и не споделяме Ваши данни с трети страни за маркетингови цели. Вашата информация се вижда от другите потребители само в контекста на приложението (например имейлът Ви при заявка за спасяване).</p>
+                </section>
+
+                <section class="mb-0">
+                    <div class="alert alert-success d-flex align-items-center rounded-4 border-0" role="alert">
+                        <i class="bi bi-info-circle-fill fs-4 me-3"></i>
+                        <div>
+                            Имате въпроси относно Вашите данни? Свържете се с нас чрез GitHub проекта или официалните канали на приложението.
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="text-center mt-5">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">
+                    <i class="bi bi-arrow-left me-2"></i>Обратно към началото
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

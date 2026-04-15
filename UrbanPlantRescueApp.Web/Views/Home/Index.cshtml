@@ -1,8 +1,34 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Добре дошли в Urban Plant Rescue";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid p-0">
+    <header class="bg-dark text-white py-5 position-relative overflow-hidden">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <span class="badge bg-success mb-3">.NET 8 | C# 12</span>
+                    <h1 class="display-3 fw-bolder mb-3">Спаси градската природа</h1>
+                    <p class="lead mb-4 text-white-50">Приложение за идентифициране, докладване и възстановяване на растения в нужда. Нека заедно направим града по-зелен.</p>
+                    <div class="d-grid gap-3 d-sm-flex">
+                        <a asp-controller="Plant" asp-action="Index" class="btn btn-success btn-lg px-4 me-sm-3">Разгледай растенията</a>
+                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-light btn-lg px-4">Виж категориите</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 d-none d-lg-block">
+                    <div class="p-5 border border-success rounded-circle text-center">
+                        <i class="bi bi-tree-fill display-1 text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 </div>
+@section Scripts {
+    <style>
+        .hover-shadow:hover {
+            transition: 0.3s;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+        }
+    </style>
+}

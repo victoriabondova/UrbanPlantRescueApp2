@@ -1,0 +1,70 @@
+﻿@model IEnumerable<UrbanPlantRescueApp.Services.ViewModels.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-md-7">
+            <h1 class="fw-bold text-dark mb-1">
+                <i class="bi bi-tags text-success me-2"></i>Категории
+            </h1>
+            <p class="text-muted">Управлявайте видовете растения и тяхната класификация в системата.</p>
+        </div>
+        <div class="col-md-5 text-md-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-success btn-lg shadow-sm px-4 rounded-pill">
+                <i class="bi bi-plus-lg me-2"></i>Нова категория
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        @if (!Model.Any())
+        {
+            <div class="col-12 text-center py-5">
+                <div class="display-1 text-muted opacity-25"><i class="bi bi-folder2-open"></i></div>
+                <h4 class="text-muted mt-3">Все още няма създадени категории.</h4>
+            </div>
+        }
+        else
+        {
+            @foreach (var category in Model)
+            {
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm category-card transition">
+                        <div class="card-body p-4">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                
+                                <span class="badge bg-light text-muted border px-2 py-1">ID: #@category.Id</span>
+                            </div>
+                            
+                            <h4 class="card-title fw-bold text-dark">@category.Name</h4>
+                            <p class="text-muted small">Всички растения, класифицирани като <strong>@category.Name</strong></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        .category-card {
+            border-left: 4px solid transparent !important;
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-left: 4px solid #198754 !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+        }
+        .icon-box {
+            display: inline-block;
+        }
+        .transition {
+            transition: all 0.3s ease-in-out;
+        }
+    </style>
+}
