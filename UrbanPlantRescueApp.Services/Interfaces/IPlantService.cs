@@ -7,7 +7,7 @@ using UrbanPlantRescueApp.Services.ViewModels;
 
 namespace UrbanPlantRescueApp.Services.Interfaces
 {
-    internal interface IPlantService
+    public interface IPlantService
     {
         Task<IEnumerable<PlantViewModel>> GetAllPlantsAsync();
         Task<PlantViewModel?> GetPlantByIdAsync(int id);
