@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace UrbanPlantRescueApp.Data.Models
 {
-    internal class RescueRequest
+    public class RescueRequest
     {
         [Key]
         public int Id { get; set; }
@@ -23,7 +23,6 @@ namespace UrbanPlantRescueApp.Data.Models
         public virtual Plant Plant { get; set; } = null!;
         [Required]
         public DateTime RequestedOn { get; set; } = DateTime.UtcNow;
-
         public string IsApproved { get; set; } = "Pending";
     }
 }

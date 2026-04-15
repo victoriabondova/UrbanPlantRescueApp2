@@ -9,7 +9,7 @@ using static UrbanPlantRescueApp.Data.Common.DataValidation.Category;
 
 namespace UrbanPlantRescueApp.Data.Models
 {
-    internal class Category
+    public class Category
     {
         [Key]
         public int Id { get; set; }

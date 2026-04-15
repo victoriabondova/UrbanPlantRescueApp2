@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UrbanPlantRescueApp.Data.Common
 {
-    public static class DataValidation
+    public class DataValidation
     {
         public static class Category
         {

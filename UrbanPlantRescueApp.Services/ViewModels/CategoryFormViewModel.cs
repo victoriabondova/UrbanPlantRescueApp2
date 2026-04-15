@@ -9,7 +9,7 @@ using UrbanPlantRescueApp.Data.Common;
 
 namespace UrbanPlantRescueApp.Services.ViewModels
 {
-    internal class CategoryFormViewModel
+    public class CategoryFormViewModel
     {
         [Required(ErrorMessage = "Името е задължително.")]
         [MinLength(DataValidation.Category.CategoryNameMinLength, ErrorMessage = "Името трябва да е поне 2 символа.")]

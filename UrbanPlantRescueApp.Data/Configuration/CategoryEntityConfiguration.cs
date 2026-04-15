@@ -11,7 +11,7 @@ using static UrbanPlantRescueApp.Data.Common.DataValidation.Category;
 
 namespace UrbanPlantRescueApp.Data.Configuration
 {
-    internal class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
+    public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
     {
         private readonly IEnumerable<Category> Categories = new List<Category>
         {
@@ -21,7 +21,6 @@ namespace UrbanPlantRescueApp.Data.Configuration
             new Category { Id = 4, Name = "Цъфтящи растения" },
             new Category { Id = 5, Name = "Билки и подправки" }
         };
-
         public void Configure(EntityTypeBuilder<Category> entity)
         {
             entity.HasKey(c => c.Id);

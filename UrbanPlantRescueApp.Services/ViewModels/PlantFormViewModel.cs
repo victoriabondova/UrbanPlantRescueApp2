@@ -8,7 +8,7 @@ using static UrbanPlantRescueApp.Data.Common.DataValidation;
 
 namespace UrbanPlantRescueApp.Services.ViewModels
 {
-    internal class PlantFormViewModel
+    public class PlantFormViewModel
     {
         [Required(ErrorMessage = "Името е задължително.")]
         [MinLength(Plant.NameMinLength, ErrorMessage = "Името трябва да е поне 2 символа.")]

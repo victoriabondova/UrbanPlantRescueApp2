@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UrbanPlantRescueApp.Data.Common
 {
-    internal class UniqueCategoryAttribute : ValidationAttribute
+    public class UniqueCategoryAttribute : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {

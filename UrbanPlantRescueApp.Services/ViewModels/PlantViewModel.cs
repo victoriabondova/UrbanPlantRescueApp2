@@ -1,6 +1,6 @@
 ﻿namespace UrbanPlantRescueApp.Services.ViewModels
 {
-    internal class PlantViewModel
+    public class PlantViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

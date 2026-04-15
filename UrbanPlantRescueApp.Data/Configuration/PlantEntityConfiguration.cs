@@ -11,7 +11,7 @@ using static UrbanPlantRescueApp.Data.Common.DataValidation.Plant;
 
 namespace UrbanPlantRescueApp.Data.Configuration
 {
-    internal class PlantEntityConfiguration : IEntityTypeConfiguration<Plant>
+    public class PlantEntityConfiguration : IEntityTypeConfiguration<Plant>
     {
         public void Configure(EntityTypeBuilder<Plant> entity)
         {

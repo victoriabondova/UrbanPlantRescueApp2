@@ -10,7 +10,7 @@ using static UrbanPlantRescueApp.Data.Common.DataValidation.Plant;
 
 namespace UrbanPlantRescueApp.Data.Models
 {
-    internal class Plant
+    public class Plant
     {
         [Key]
         public int Id { get; set; }

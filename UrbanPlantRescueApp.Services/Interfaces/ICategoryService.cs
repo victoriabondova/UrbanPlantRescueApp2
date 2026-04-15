@@ -7,7 +7,7 @@ using UrbanPlantRescueApp.Services.ViewModels;
 
 namespace UrbanPlantRescueApp.Services.Interfaces
 {
-    internal interface ICategoryService
+    public interface ICategoryService
     {
         Task<IEnumerable<CategoryViewModel>> GetAllCategoriesAsync();
         Task AddCategoryAsync(CategoryFormViewModel model);

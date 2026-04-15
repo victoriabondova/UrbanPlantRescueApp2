@@ -9,7 +9,7 @@ using UrbanPlantRescueApp.Data.Models;
 
 namespace UrbanPlantRescueApp.Data.Configuration
 {
-    internal class RescueRequestEntityConfiguration : IEntityTypeConfiguration<RescueRequest>
+    public class RescueRequestEntityConfiguration : IEntityTypeConfiguration<RescueRequest>
     {
         public void Configure(EntityTypeBuilder<RescueRequest> entity)
         {

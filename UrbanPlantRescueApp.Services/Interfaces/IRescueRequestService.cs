@@ -7,7 +7,7 @@ using UrbanPlantRescueApp.Services.ViewModels;
 
 namespace UrbanPlantRescueApp.Services.Interfaces
 {
-    internal interface IRescueRequestService
+    public interface IRescueRequestService
     {
         Task CreateRescueRequestAsync(int plantId, string requesterId);
         Task<IEnumerable<RescueRequestViewModel>> GetRequestsByPlantIdAsync(int plantId);

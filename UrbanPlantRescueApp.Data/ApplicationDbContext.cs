@@ -9,7 +9,7 @@ using UrbanPlantRescueApp.Data.Models;
 
 namespace UrbanPlantRescueApp.Data
 {
-    internal class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
            : base(options)
