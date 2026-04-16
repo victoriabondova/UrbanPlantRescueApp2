@@ -1,0 +1,76 @@
+﻿@model IEnumerable<UrbanPlantRescueApp.Services.ViewModels.RescueRequestViewModel>
+
+@{
+    ViewData["Title"] = "Управление на заявки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="fw-bold mb-1">🛡️ Админ панел</h1>
+            <p class="text-muted mb-0">Управление на всички заявки за спасяване.</p>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 bg-light rounded-4 border">
+            <i class="bi bi-inbox fs-1 text-muted"></i>
+            <p class="text-muted mt-3">Няма активни заявки.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-dark text-white text-center">
+                        <tr>
+                            <th class="py-3 px-4">Растение</th>
+                            <th class="py-3">Потребител</th>
+                            <th class="py-3">Дата</th>
+                            <th class="py-3 px-4">Статус</th>
+                            <th class="py-3 px-4">Действие</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach (var request in Model)
+                        {
+                            <tr>
+                                <td class="py-3 px-4 fw-bold">@request.PlantName</td>
+                                <td class="py-3">@request.RequesterEmail</td>
+                                <td class="py-3 text-muted">@request.RequestDate.ToShortDateString()</td>
+                                <td class="py-3 px-4">
+                                    @if (request.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">В изчакване</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success px-3 py-2 rounded-pill">Одобрена</span>
+                                    }
+                                </td>
+                                <td class="py-3 px-4">
+                                    @if (request.Status == "Pending")
+                                    {
+                                        <form asp-area="Admin" asp-controller="RescueRequest" asp-action="Approve" method="post">
+                                            <input type="hidden" name="requestId" value="@request.Id" />
+                                            <button type="submit" class="btn btn-success btn-sm rounded-pill px-3">
+                                                <i class="bi bi-check-circle me-1"></i>Одобри
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-success fw-bold">✓ Одобрена</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
