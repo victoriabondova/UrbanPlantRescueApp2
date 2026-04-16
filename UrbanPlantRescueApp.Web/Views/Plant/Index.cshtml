@@ -17,8 +17,6 @@
             </a>
         }
     </div>
-
-    {{!-- Search Form --}}
     <form method="get" asp-action="Index" class="mb-5">
         <div class="input-group shadow-sm">
             <input type="text"
@@ -79,8 +77,6 @@
             }
         }
     </div>
-
-    {{!-- Pagination --}}
     @if (Model.TotalPages > 1)
     {
         <nav class="mt-5">

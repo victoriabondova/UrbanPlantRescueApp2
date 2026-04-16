@@ -20,3 +20,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+html, body {
+    background-color: #f0f7f4 !important;
+    min-height: 100%;
+}
+
+main {
+    background-color: transparent !important;
+}
+footer {
+    margin-top: 3rem !important;
+    padding: 1.5rem 0 !important;
+}
