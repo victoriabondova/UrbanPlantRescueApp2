@@ -1,0 +1,56 @@
+﻿@page
+@model UrbanPlantRescueApp.Web.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="row justify-content-center py-5">
+    <div class="col-md-5">
+        <div class="card border-0 shadow-sm p-4" style="border-radius: 16px !important;">
+            <div class="text-center mb-4">
+                <div style="font-size: 3rem;">🌿</div>
+                <h2 class="fw-bold" style="color: #1b4332;">Създай акаунт</h2>
+                <p class="text-muted">Присъедини се към общността за спасяване на растения</p>
+            </div>
+
+            <form id="registerForm" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Имейл адрес</label>
+                    <input name="Input.Email" type="email" class="form-control form-control-lg"
+                           placeholder="вашият@имейл.com" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Парола</label>
+                    <input name="Input.Password" type="password" class="form-control form-control-lg"
+                           placeholder="Минимум 6 символа" />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Потвърди паролата</label>
+                    <input name="Input.ConfirmPassword" type="password" class="form-control form-control-lg"
+                           placeholder="Въведи паролата отново" />
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100 rounded-pill fw-bold py-3">
+                    <i class="bi bi-person-plus me-2"></i>Регистрирай се
+                </button>
+            </form>
+
+            <hr class="my-4" />
+
+            <div class="text-center">
+                <p class="text-muted mb-0">
+                    Вече имаш акаунт?
+                    <a href="/Identity/Account/Login" class="fw-bold" style="color: #2d6a4f;">Влез тук</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
