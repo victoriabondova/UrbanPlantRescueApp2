@@ -102,5 +102,42 @@ namespace UrbanPlantRescueApp.Services
             if (plant == null) return false;
             return plant.AddedByUserId == userId;
         }
+        public async Task<PlantListViewModel> GetFilteredPlantsAsync(string? searchTerm, int page, int pageSize)
+        {
+            var query = dbContext.Plants
+                .Include(p => p.Category)
+                .AsQueryable();
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                searchTerm = searchTerm.ToLower();
+                query = query.Where(p =>
+                    p.Name.ToLower().Contains(searchTerm) ||
+                    p.Description.ToLower().Contains(searchTerm) ||
+                    p.Category.Name.ToLower().Contains(searchTerm));
+            }
+            int totalItems = await query.CountAsync();
+            int totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+            var plants = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new PlantViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    CategoryName = p.Category.Name,
+                    ImageUrl = p.ImageUrl,
+                    AddedByUserId = p.AddedByUserId
+                })
+                .ToListAsync();
+            return new PlantListViewModel
+            {
+                Plants = plants,
+                SearchTerm = searchTerm,
+                CurrentPage = page,
+                TotalPages = totalPages,
+                PageSize = pageSize
+            };
+        }
     }
 }

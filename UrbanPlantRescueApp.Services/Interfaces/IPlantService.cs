@@ -16,5 +16,6 @@ namespace UrbanPlantRescueApp.Services.Interfaces
         Task EditPlantAsync(int id, PlantFormViewModel model);
         Task DeletePlantAsync(int id);
         Task<bool> IsOwnerAsync(int plantId, string userId);
+        Task<PlantListViewModel> GetFilteredPlantsAsync(string? searchTerm, int page, int pageSize);
     }
 }

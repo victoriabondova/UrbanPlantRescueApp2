@@ -19,10 +19,10 @@ namespace UrbanPlantRescueApp.Web.Controllers
             this.rescueRequestService = rescueRequestService;
         }
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm, int page = 1)
         {
-            var allPlants = await plantService.GetAllPlantsAsync();
-            return View(allPlants);
+            var model = await plantService.GetFilteredPlantsAsync(searchTerm, page, 6);
+            return View(model);
         }
         [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
