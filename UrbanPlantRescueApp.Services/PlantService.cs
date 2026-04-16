@@ -139,5 +139,21 @@ namespace UrbanPlantRescueApp.Services
                 PageSize = pageSize
             };
         }
+        public async Task<IEnumerable<PlantViewModel>> GetPlantsByCategoryAsync(int categoryId)
+        {
+            return await dbContext.Plants
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == categoryId)
+                .Select(p => new PlantViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Description = p.Description,
+                    CategoryName = p.Category.Name,
+                    ImageUrl = p.ImageUrl,
+                    AddedByUserId = p.AddedByUserId
+                })
+                .ToListAsync();
+        }
     }
 }

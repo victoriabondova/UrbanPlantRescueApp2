@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using UrbanPlantRescueApp.Services;
 using UrbanPlantRescueApp.Services.Interfaces;
 using UrbanPlantRescueApp.Services.ViewModels;
 
@@ -9,9 +10,11 @@ namespace UrbanPlantRescueApp.Web.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly IPlantService plantService;
+        public CategoryController(ICategoryService categoryService, IPlantService plantService)
         {
             this.categoryService = categoryService;
+            this.plantService = plantService;
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index()
@@ -34,6 +37,18 @@ namespace UrbanPlantRescueApp.Web.Controllers
             if (!ModelState.IsValid) { return View(model); }
             await categoryService.AddCategoryAsync(model);
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Plants(int id)
+        {
+            var plants = await plantService.GetPlantsByCategoryAsync(id);
+            var category = (await categoryService.GetAllCategoriesAsync())
+                .FirstOrDefault(c => c.Id == id);
+
+            if (category == null) return NotFound();
+
+            ViewBag.CategoryName = category.Name;
+            ViewBag.CategoryId = id;
+            return View(plants);
         }
     }
 }

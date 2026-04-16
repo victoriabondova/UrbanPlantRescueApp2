@@ -1,0 +1,87 @@
+﻿@model IEnumerable<UrbanPlantRescueApp.Services.ViewModels.PlantViewModel>
+
+@{
+    ViewData["Title"] = ViewBag.CategoryName + " - Растения";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+    <div>
+        <a asp-action="Index" class="text-decoration-none mb-2 d-inline-block" style="color: #2d6a4f;">
+            <i class="bi bi-arrow-left me-1"></i>Обратно към категориите
+        </a>
+        <h1 class="fw-bold mb-1">🌿 @ViewBag.CategoryName</h1>
+        <p class="text-muted mb-0">Всички растения в тази категория.</p>
+    </div>
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <a asp-controller="Plant" asp-action="Create" class="btn btn-success btn-lg px-4 rounded-pill shadow-sm">
+            <i class="bi bi-plus-circle me-2"></i>Добави растение
+        </a>
+    }
+</div>
+
+@if (!Model.Any())
+{
+    <div class="text-center py-5 bg-white rounded-4 border">
+        <div style="font-size: 4rem;">🌱</div>
+        <h3 class="text-muted mt-3">Няма растения в тази категория.</h3>
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <a asp-controller="Plant" asp-action="Create" class="btn btn-success mt-3 rounded-pill px-4">
+                <i class="bi bi-plus-circle me-2"></i>Добави първото растение
+            </a>
+        }
+    </div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var plant in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px !important; background: white; transition: transform 0.2s ease;">
+                    <div class="card-body d-flex flex-column p-0">
+                        @if (!string.IsNullOrEmpty(plant.ImageUrl))
+                        {
+                            <img src="@plant.ImageUrl" class="rounded-3 mb-3 w-100"
+                                 style="height: 180px; object-fit: cover;" alt="@plant.Name" />
+                        }
+                        else
+                        {
+                            <div class="rounded-3 mb-3 d-flex align-items-center justify-content-center"
+                                 style="height: 180px; background-color: #f0f7f4;">
+                                <span style="font-size: 4rem;">🌿</span>
+                            </div>
+                        }
+                        <h5 class="fw-bold mb-2" style="color: #1b4332;">@plant.Name</h5>
+                        <p class="text-muted small flex-grow-1">@plant.Description</p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a asp-controller="Plant" asp-action="Details" asp-route-id="@plant.Id"
+                                   asp-route-returnUrl="@Context.Request.Path"
+                                   class="btn btn-success rounded-pill flex-grow-1">
+                                <i class="bi bi-eye me-1"></i>Детайли
+                            </a>
+                            @if (User.Identity!.IsAuthenticated &&
+                                                            (User.IsInRole("Admin") || User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == plant.AddedByUserId))
+                            {
+                                <a asp-controller="Plant" asp-action="Edit" asp-route-id="@plant.Id"
+                                       class="btn btn-outline-warning rounded-pill">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section Scripts {
+    <style>
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2rem rgba(45, 106, 79, 0.1) !important;
+        }
+    </style>
+}
