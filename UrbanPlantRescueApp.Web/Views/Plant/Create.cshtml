@@ -1,62 +1,99 @@
 ﻿@model UrbanPlantRescueApp.Services.ViewModels.PlantFormViewModel
 
 @{
-    ViewData["Title"] = "Добави ново растение";
+    ViewData["Title"] = "Добави растение";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-success text-white">
-                    <h3 class="card-title mb-0">Добавяне на растение</h3>
+<div class="row justify-content-center py-4">
+    <div class="col-md-7">
+        <div class="mb-4">
+            <a asp-action="Index" class="text-decoration-none d-inline-flex align-items-center gap-2"
+                   style="color: #2d6a4f; font-weight: 500;">
+                <i class="bi bi-arrow-left"></i> Обратно към каталога
+            </a>
+        </div>
+
+        <div class="card border-0 shadow p-5" style="border-radius: 24px !important;">
+            <div class="text-center mb-5">
+                <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle"
+                     style="width: 80px; height: 80px; background: linear-gradient(135deg, #d8f3dc, #b7e4c7); font-size: 2.5rem;">
+                    🌱
                 </div>
-                <div class="card-body">
-                    <form asp-action="Create" method="post">
-                        @* Валидация за целия модел *@
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <div class="mb-3">
-                            <label asp-for="Name" class="form-label">Име на растението</label>
-                            <input asp-for="Name" class="form-control" placeholder="напр. Фикус" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Description" class="form-label">Описание</label>
-                            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="ImageUrl" class="form-label">Линк към снимка</label>
-                            <input asp-for="ImageUrl" class="form-control" placeholder="Постави линк към изображение..." />
-                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="CategoryId" class="form-label">Категория</label>
-                            <select asp-for="CategoryId" class="form-select">
-                                <option value="">-- Избери категория --</option>
-                                @foreach (var category in Model.Categories)
-                                {
-                                    <option value="@category.Id">@category.Name</option>
-                                }
-                            </select>
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success">Запази растението</button>
-                            <a asp-action="Index" class="btn btn-outline-secondary">Отказ</a>
-                        </div>
-                    </form>
-                </div>
+                <h2 class="fw-bold mb-1" style="color: #1b4332;">Добави растение</h2>
+                <p class="text-muted">Помогни на растение да намери грижовни ръце</p>
             </div>
+
+            <form asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-4">
+                    <label asp-for="Name" class="form-label d-flex align-items-center gap-2 mb-2">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">🌿</span>
+                        <span class="fw-bold" style="color: #1b4332;">Име на растението</span>
+                    </label>
+                    <input asp-for="Name" class="form-control form-control-lg"
+                           style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                           placeholder="напр. Фикус, Монстера..." />
+                    <span asp-validation-for="Name" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Description" class="form-label d-flex align-items-center gap-2 mb-2">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">📝</span>
+                        <span class="fw-bold" style="color: #1b4332;">Описание</span>
+                    </label>
+                    <textarea asp-for="Description" class="form-control" rows="4"
+                              style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                              placeholder="Опиши растението и защо се нуждае от помощ..."></textarea>
+                    <span asp-validation-for="Description" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="ImageUrl" class="form-label d-flex align-items-center gap-2 mb-2">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">📸</span>
+                        <span class="fw-bold" style="color: #1b4332;">
+                            Линк към снимка
+                            <span class="text-muted fw-normal small">(незадължително)</span>
+                        </span>
+                    </label>
+                    <input asp-for="ImageUrl" class="form-control form-control-lg"
+                           style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                           placeholder="https://..." />
+                    <span asp-validation-for="ImageUrl" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <div class="mb-5">
+                    <label asp-for="CategoryId" class="form-label d-flex align-items-center gap-2 mb-2">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">📂</span>
+                        <span class="fw-bold" style="color: #1b4332;">Категория</span>
+                    </label>
+                    <select asp-for="CategoryId" class="form-select form-select-lg"
+                            style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                            asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                        <option value="">-- Избери категория --</option>
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <div class="d-grid gap-3">
+                    <button type="submit" class="btn btn-lg fw-bold py-3"
+                            style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 14px; font-size: 1.1rem;">
+                        <i class="bi bi-plus-circle me-2"></i>Запази растението
+                    </button>
+                    <a asp-action="Index" class="btn btn-lg py-3"
+                           style="border: 2px solid #d8ede5; border-radius: 14px; color: #6c757d; background: white;">
+                        Отказ
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 @section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
+    <partial name="_ValidationScriptsPartial" />
 }
