@@ -38,6 +38,7 @@ namespace UrbanPlantRescueApp.Web.Controllers
             await categoryService.AddCategoryAsync(model);
             return RedirectToAction(nameof(Index));
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Plants(int id)
         {
             var plants = await plantService.GetPlantsByCategoryAsync(id);
