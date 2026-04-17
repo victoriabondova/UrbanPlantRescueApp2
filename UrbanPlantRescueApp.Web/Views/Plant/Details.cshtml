@@ -3,138 +3,157 @@
 
 @{
     ViewData["Title"] = Model.Name;
+    var returnUrl = Context.Request.Query["returnUrl"].ToString();
+    var backUrl = !string.IsNullOrEmpty(returnUrl) ? returnUrl : "/Plant/Index";
 }
 
-<div class="container py-5">
-    <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Index" class="text-decoration-none text-success">Каталог</a></li>
-            <li class="breadcrumb-item active" aria-current="page">@Model.Name</li>
-        </ol>
-    </nav>
+<div class="mb-4">
+    <a href="@backUrl" class="text-decoration-none d-inline-flex align-items-center gap-2"
+           style="color: #2d6a4f; font-weight: 500;">
+        <i class="bi bi-arrow-left"></i> Назад
+    </a>
+</div>
 
-    <div class="row g-5">
-        <div class="col-lg-6">
-            <div class="position-relative shadow-lg rounded-4 overflow-hidden bg-light border">
-                @if (!string.IsNullOrEmpty(Model.ImageUrl))
-                {
-                    <img src="@Model.ImageUrl" class="img-fluid w-100 h-100 object-fit-cover" style="min-height: 400px;" alt="@Model.Name" />
-                }
-                else
-                {
-                    <div class="d-flex flex-column align-items-center justify-content-center text-muted p-5" style="min-height: 400px;">
-                        <i class="bi bi-image-fill display-1 opacity-25"></i>
-                        <p class="mt-2">Няма налична снимка</p>
-                    </div>
-                }
-                <span class="badge bg-success position-absolute top-0 start-0 m-3 fs-6 px-3 py-2">
-                    @Model.CategoryName
-                </span>
-            </div>
-        </div>
-
-        <div class="col-lg-6 d-flex flex-column">
-            <div class="mb-auto">
-                <h1 class="display-4 fw-bold text-dark mb-3">@Model.Name</h1>
-                <div class="d-flex align-items-center mb-4">
-                    <div class="bg-success bg-opacity-10 text-success rounded-pill px-3 py-1 fw-bold small">
-                        ID: #@Model.Id
-                    </div>
-                </div>
-
-                <h5 class="fw-bold text-muted border-bottom pb-2">Описание</h5>
-                <p class="lead text-secondary mt-3">@Model.Description</p>
-            </div>
-
-            <div class="mt-5 p-4 bg-light rounded-4 border">
-                <div class="d-grid gap-3">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <form asp-controller="RescueRequest" asp-action="Create" method="post">
-                            <input type="hidden" name="plantId" value="@Model.Id" />
-                            <button type="submit" class="btn btn-success btn-lg w-100 shadow-sm py-3 rounded-pill fw-bold">
-                                <i class="bi bi-heart-fill me-2"></i>Спаси това растение!
-                            </button>
-                        </form>
-                    }
-                    else
-                    {
-                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-success btn-lg w-100 py-3 rounded-pill fw-bold">
-                            Влезте, за да спасите
-                        </a>
-                    }
-
-                    <div class="d-flex gap-2 mt-2">
-                        @if (User.IsInRole("Admin") || User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == Model.AddedByUserId)
-                        {
-                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning flex-grow-1 rounded-pill py-2">
-                                <i class="bi bi-pencil-square me-1"></i> Редактирай
-                            </a>
-                        }
-                        <a href="@(Context.Request.Query["returnUrl"].ToString() != "" ? Context.Request.Query["returnUrl"].ToString() : "/Plant/Index")"
-                            class="btn btn-outline-secondary rounded-pill py-2 px-4">
-                            Назад
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row mt-5 pt-5 border-top">
-        <div class="col-lg-8 mx-auto">
-            <h3 class="fw-bold mb-4 text-center">Заявки за спасяване <span class="badge bg-dark rounded-pill">@(ViewBag.Requests != null ? ((IEnumerable<RescueRequestViewModel>)ViewBag.Requests).Count() : 0)</span></h3>
-
-            @if (ViewBag.Requests != null && ((IEnumerable<RescueRequestViewModel>)ViewBag.Requests).Any())
+<div class="row g-5">
+    <div class="col-lg-6">
+        <div class="position-relative rounded-4 overflow-hidden shadow"
+             style="min-height: 400px; background-color: #f0f7f4;">
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
             {
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-dark text-white text-center">
-                                <tr>
-                                    <th class="py-3 px-4">Потребител</th>
-                                    <th class="py-3">Дата</th>
-                                    <th class="py-3 px-4">Статус</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                @foreach (var request in (IEnumerable<RescueRequestViewModel>)ViewBag.Requests)
-                                {
-                                    <tr>
-                                        <td class="py-3 px-4 fw-bold">@request.RequesterEmail</td>
-                                        <td class="py-3 text-muted">@request.RequestDate.ToShortDateString()</td>
-                                        <td class="py-3 px-4">
-                                            @if (request.Status == "Pending")
-                                            {
-                                                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">В изчакване</span>
-                                            }
-                                            else
-                                            {
-                                                <span class="badge bg-success px-3 py-2 rounded-pill">@request.Status</span>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <img src="@Model.ImageUrl" class="w-100 h-100"
+                     style="object-fit: cover; min-height: 400px;" alt="@Model.Name" />
             }
             else
             {
-                <div class="text-center py-5 bg-light rounded-4 border border-dashed">
-                    <i class="bi bi-inbox fs-1 text-muted"></i>
-                    <p class="text-muted mt-3">Все още няма активни заявки за това растение.</p>
+                <div class="d-flex flex-column align-items-center justify-content-center h-100"
+                     style="min-height: 400px;">
+                    <span style="font-size: 8rem;">🌿</span>
+                    <p class="text-muted mt-2">Няма налична снимка</p>
+                </div>
+            }
+            <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2 fs-6"
+                  style="background-color: #2d6a4f; border-radius: 10px;">
+                🌿 @Model.CategoryName
+            </span>
+        </div>
+    </div>
+
+    <div class="col-lg-6 d-flex flex-column">
+        <div class="mb-auto">
+            <h1 class="display-4 fw-bold mb-3" style="color: #1b4332;">@Model.Name</h1>
+
+            <div class="p-4 rounded-4 mb-4" style="background-color: #f0f7f4;">
+                <h5 class="fw-bold mb-2 d-flex align-items-center gap-2" style="color: #2d6a4f;">
+                    <i class="bi bi-card-text"></i> Описание
+                </h5>
+                <p class="text-secondary mb-0" style="line-height: 1.8;">@Model.Description</p>
+            </div>
+        </div>
+
+        <div class="p-4 rounded-4 border" style="background: white;">
+            @if (User.Identity!.IsAuthenticated &&
+                 User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value != Model.AddedByUserId)
+            {
+                <form asp-controller="RescueRequest" asp-action="Create" method="post" class="mb-3">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="plantId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-lg w-100 fw-bold py-3"
+                            style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 14px;">
+                        <i class="bi bi-heart-fill me-2"></i>Спаси това растение!
+                    </button>
+                </form>
+            }
+            else if (!User.Identity!.IsAuthenticated)
+            {
+                <a asp-area="Identity" asp-page="/Account/Login"
+                       class="btn btn-lg w-100 fw-bold py-3 mb-3"
+                       style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 14px;">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Влезте, за да спасите
+                </a>
+            }
+
+            @if (User.IsInRole("Admin") || User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == Model.AddedByUserId)
+            {
+                <div class="d-flex gap-2">
+                    <a asp-action="Edit" asp-route-id="@Model.Id"
+                           class="btn btn-lg flex-grow-1 fw-bold py-2"
+                           style="background-color: #fff3cd; color: #856404; border: none; border-radius: 14px;">
+                        <i class="bi bi-pencil-square me-1"></i>Редактирай
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@Model.Id"
+                           class="btn btn-lg px-4 py-2"
+                           style="background-color: #ffe0e0; color: #c0392b; border: none; border-radius: 14px;">
+                        <i class="bi bi-trash"></i>
+                    </a>
                 </div>
             }
         </div>
     </div>
 </div>
 
+<div class="mt-5 pt-4 border-top">
+    <h3 class="fw-bold mb-4 d-flex align-items-center gap-2" style="color: #1b4332;">
+        <i class="bi bi-heart"></i> Заявки за спасяване
+        <span class="badge rounded-pill ms-2"
+              style="background-color: #2d6a4f; font-size: 0.9rem;">
+            @(ViewBag.Requests != null ? ((IEnumerable<RescueRequestViewModel>)ViewBag.Requests).Count() : 0)
+        </span>
+    </h3>
+
+    @if (ViewBag.Requests != null && ((IEnumerable<RescueRequestViewModel>)ViewBag.Requests).Any())
+    {
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="text-white text-center" style="background-color: #2d6a4f;">
+                        <tr>
+                            <th class="py-3 px-4">Потребител</th>
+                            <th class="py-3">Дата</th>
+                            <th class="py-3 px-4">Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach (var request in (IEnumerable<RescueRequestViewModel>)ViewBag.Requests)
+                        {
+                            <tr>
+                                <td class="py-3 px-4 fw-bold">@request.RequesterEmail</td>
+                                <td class="py-3 text-muted">@request.RequestDate.ToShortDateString()</td>
+                                <td class="py-3 px-4">
+                                    @if (request.Status == "Pending")
+                                    {
+                                        <span class="badge px-3 py-2 rounded-pill"
+                                              style="background-color: #fff3cd; color: #856404;">
+                                            ⏳ В изчакване
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge px-3 py-2 rounded-pill"
+                                              style="background-color: #d8f3dc; color: #2d6a4f;">
+                                            ✅ Одобрена
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5 rounded-4" style="background-color: #f0f7f4;">
+            <span style="font-size: 3rem;">🌱</span>
+            <p class="text-muted mt-3 mb-0">Все още няма активни заявки за това растение.</p>
+        </div>
+    }
+</div>
+
 @section Scripts {
     <style>
-        .object-fit-cover { object-fit: cover; }
-        .border-dashed { border-style: dashed !important; }
-        .breadcrumb-item + .breadcrumb-item::before { content: "•"; }
+        .object-fit-cover {
+            object-fit: cover;
+        }
     </style>
 }
