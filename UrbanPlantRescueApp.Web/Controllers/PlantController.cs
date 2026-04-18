@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using UrbanPlantRescueApp.Services;
 using UrbanPlantRescueApp.Services.Interfaces;
 using UrbanPlantRescueApp.Services.ViewModels;
 
@@ -12,11 +13,13 @@ namespace UrbanPlantRescueApp.Web.Controllers
         private readonly IPlantService plantService;
         private readonly ICategoryService categoryService;
         private readonly IRescueRequestService rescueRequestService;
-        public PlantController(IPlantService plantService, ICategoryService categoryService, IRescueRequestService rescueRequestService)
+        private readonly ICommentService commentService;
+        public PlantController(IPlantService plantService, ICategoryService categoryService, IRescueRequestService rescueRequestService, ICommentService commentService)
         {
             this.plantService = plantService;
             this.categoryService = categoryService;
             this.rescueRequestService = rescueRequestService;
+            this.commentService = commentService;
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index(string? searchTerm, int page = 1)
@@ -30,6 +33,8 @@ namespace UrbanPlantRescueApp.Web.Controllers
             var plant = await plantService.GetPlantByIdAsync(id);
             if (plant == null) return NotFound();
             ViewBag.Requests = await rescueRequestService.GetRequestsByPlantIdAsync(id);
+            ViewBag.Comments = await commentService.GetCommentsByPlantIdAsync(id);
+            ViewBag.CommentForm = new CommentFormViewModel { PlantId = id };
             return View(plant);
         }
         [HttpGet]

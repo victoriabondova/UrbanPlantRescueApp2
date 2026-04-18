@@ -149,6 +149,82 @@
         </div>
     }
 </div>
+<div class="mt-5 pt-4 border-top">
+    <h3 class="fw-bold mb-4 d-flex align-items-center gap-2" style="color: #1b4332;">
+        <i class="bi bi-chat-dots"></i> Коментари
+        <span class="badge rounded-pill ms-2"
+              style="background-color: #2d6a4f; font-size: 0.9rem;">
+            @(ViewBag.Comments != null ? ((IEnumerable<UrbanPlantRescueApp.Services.ViewModels.CommentViewModel>)ViewBag.Comments).Count() : 0)
+        </span>
+    </h3>
+
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 16px;">
+            <form asp-controller="Comment" asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="PlantId" value="@Model.Id" />
+                <div class="mb-3">
+                    <label class="form-label fw-bold d-flex align-items-center gap-2" style="color: #1b4332;">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">💬</span>
+                        Добави коментар
+                    </label>
+                    <textarea name="Content" class="form-control" rows="3"
+                              style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                              placeholder="Сподели наблюдения за това растение..."></textarea>
+                </div>
+                <button type="submit" class="btn fw-bold px-4 py-2"
+                        style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 12px;">
+                    <i class="bi bi-send me-2"></i>Публикувай
+                </button>
+            </form>
+        </div>
+    }
+
+    @if (ViewBag.Comments != null && ((IEnumerable<UrbanPlantRescueApp.Services.ViewModels.CommentViewModel>)ViewBag.Comments).Any())
+    {
+        <div class="d-flex flex-column gap-3">
+            @foreach (var comment in (IEnumerable<UrbanPlantRescueApp.Services.ViewModels.CommentViewModel>)ViewBag.Comments)
+            {
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 16px;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                 style="width: 40px; height: 40px; background-color: #d8f3dc; color: #2d6a4f;">
+                                @comment.AuthorEmail.Substring(0, 1).ToUpper()
+                            </div>
+                            <div>
+                                <div class="fw-bold" style="color: #1b4332;">@comment.AuthorEmail</div>
+                                <div class="text-muted small">@comment.CreatedOn.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                            </div>
+                        </div>
+                        @if (User.IsInRole("Admin") || User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == comment.AuthorId)
+                        {
+                            <form asp-controller="Comment" asp-action="Delete" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="commentId" value="@comment.Id" />
+                                <input type="hidden" name="plantId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-sm px-3 py-1"
+                                        style="background-color: #ffe0e0; color: #c0392b; border: none; border-radius: 8px;">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        }
+                    </div>
+                    <p class="mb-0 mt-2" style="color: #444; line-height: 1.6;">@comment.Content</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5 rounded-4" style="background-color: #f0f7f4;">
+            <span style="font-size: 3rem;">💬</span>
+            <p class="text-muted mt-3 mb-0">Все още няма коментари. Бъди първият!</p>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <style>
