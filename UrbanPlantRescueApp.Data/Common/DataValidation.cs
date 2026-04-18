@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UrbanPlantRescueApp.Data.Common
+﻿namespace UrbanPlantRescueApp.Data.Common
 {
     public class DataValidation
     {
@@ -19,6 +13,25 @@ namespace UrbanPlantRescueApp.Data.Common
             public const int NameMaxLength = 150;
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 1500;
+        }
+        public static class Comment
+        {
+            public const int ContentMinLength = 2;
+            public const int ContentMaxLength = 500;
+        }
+        public static class PlantCondition
+        {
+            public const int NotesMinLength = 2;
+            public const int NotesMaxLength = 1000;
+        }
+        public static class UserProfile
+        {
+            public const int FirstNameMinLength = 3;
+            public const int FirstNameMaxLength = 50;
+            public const int LastNameMinLength = 4;
+            public const int LastNameMaxLength = 50;
+            public const int BioMinLength = 10;
+            public const int BioMaxLength = 500;
         }
     }
 }

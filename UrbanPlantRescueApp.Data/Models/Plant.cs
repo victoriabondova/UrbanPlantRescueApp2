@@ -29,5 +29,7 @@ namespace UrbanPlantRescueApp.Data.Models
         public string AddedByUserId { get; set; } = null!;
         public virtual IdentityUser AddedByUser { get; set; } = null!;
         public virtual ICollection<RescueRequest> RescueRequests { get; set; } = new List<RescueRequest>();
+        public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public virtual ICollection<PlantCondition> Conditions { get; set; } = new List<PlantCondition>();
     }
 }
