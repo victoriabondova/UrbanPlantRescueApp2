@@ -225,6 +225,105 @@
         </div>
     }
 </div>
+<div class="mt-5 pt-4 border-top">
+    <h3 class="fw-bold mb-4 d-flex align-items-center gap-2" style="color: #1b4332;">
+        <i class="bi bi-activity"></i> Състояние на растението
+        <span class="badge rounded-pill ms-2"
+              style="background-color: #2d6a4f; font-size: 0.9rem;">
+            @(ViewBag.Conditions != null ? ((IEnumerable<UrbanPlantRescueApp.Services.ViewModels.PlantConditionViewModel>)ViewBag.Conditions).Count() : 0)
+        </span>
+    </h3>
+
+    @if (User.Identity!.IsAuthenticated &&
+         (User.IsInRole("Admin") || User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == Model.AddedByUserId))
+    {
+        <div class="card border-0 shadow-sm p-4 mb-4" style="border-radius: 16px;">
+            <form asp-controller="PlantCondition" asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="PlantId" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold d-flex align-items-center gap-2" style="color: #1b4332;">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">🌡️</span>
+                        Статус на растението
+                    </label>
+                    <select name="Status" class="form-select"
+                            style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;">
+                        <option value="Critical">🔴 Критично</option>
+                        <option value="Poor">🟠 Лошо</option>
+                        <option value="Stable">🟡 Стабилно</option>
+                        <option value="Good">🟢 Добро</option>
+                        <option value="Recovered">✅ Възстановено</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold d-flex align-items-center gap-2" style="color: #1b4332;">
+                        <span class="d-flex align-items-center justify-content-center rounded-circle"
+                              style="width: 28px; height: 28px; background-color: #d8f3dc; font-size: 0.85rem;">📋</span>
+                        Бележки
+                    </label>
+                    <textarea name="Notes" class="form-control" rows="3"
+                              style="border-radius: 12px; border: 2px solid #d8ede5; background-color: #fafffe;"
+                              placeholder="Опиши текущото състояние на растението..."></textarea>
+                </div>
+
+                <button type="submit" class="btn fw-bold px-4 py-2"
+                        style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 12px;">
+                    <i class="bi bi-plus-circle me-2"></i>Докладвай състояние
+                </button>
+            </form>
+        </div>
+    }
+
+    @if (ViewBag.Conditions != null && ((IEnumerable<UrbanPlantRescueApp.Services.ViewModels.PlantConditionViewModel>)ViewBag.Conditions).Any())
+    {
+        <div class="d-flex flex-column gap-3">
+            @foreach (var condition in (IEnumerable<UrbanPlantRescueApp.Services.ViewModels.PlantConditionViewModel>)ViewBag.Conditions)
+            {
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 16px;">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <span class="badge px-3 py-2 rounded-pill mb-2"
+                                  style="@(condition.Status == "Critical" ? "background-color: #ffe0e0; color: #c0392b;" :
+                                                                                                             condition.Status == "Poor" ? "background-color: #ffe8cc; color: #e67e22;" :
+                                                                                                             condition.Status == "Stable" ? "background-color: #fff3cd; color: #856404;" :
+                                                                                                             condition.Status == "Good" ? "background-color: #d8f3dc; color: #2d6a4f;" :
+                                                                                                             "background-color: #d1f2eb; color: #1a7a5e;")">
+                                @(condition.Status == "Critical" ? "🔴 Критично" :
+                                  condition.Status == "Poor" ? "🟠 Лошо" :
+                                  condition.Status == "Stable" ? "🟡 Стабилно" :
+                                  condition.Status == "Good" ? "🟢 Добро" : "✅ Възстановено")
+                            </span>
+                            <div class="text-muted small">@condition.ReportedOn.ToLocalTime().ToString("dd.MM.yyyy HH:mm")</div>
+                        </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <form asp-controller="PlantCondition" asp-action="Delete" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="conditionId" value="@condition.Id" />
+                                <input type="hidden" name="plantId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-sm px-3 py-1"
+                                        style="background-color: #ffe0e0; color: #c0392b; border: none; border-radius: 8px;">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        }
+                    </div>
+                    <p class="mb-0 mt-2" style="color: #444; line-height: 1.6;">@condition.Notes</p>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5 rounded-4" style="background-color: #f0f7f4;">
+            <span style="font-size: 3rem;">🌡️</span>
+            <p class="text-muted mt-3 mb-0">Все още няма докладвани състояния за това растение.</p>
+        </div>
+    }
+</div>
 
 @section Scripts {
     <style>

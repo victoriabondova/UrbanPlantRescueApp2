@@ -14,12 +14,14 @@ namespace UrbanPlantRescueApp.Web.Controllers
         private readonly ICategoryService categoryService;
         private readonly IRescueRequestService rescueRequestService;
         private readonly ICommentService commentService;
-        public PlantController(IPlantService plantService, ICategoryService categoryService, IRescueRequestService rescueRequestService, ICommentService commentService)
+        private readonly IPlantConditionService plantConditionService;
+        public PlantController(IPlantService plantService, ICategoryService categoryService, IRescueRequestService rescueRequestService, ICommentService commentService, IPlantConditionService plantConditionService)
         {
             this.plantService = plantService;
             this.categoryService = categoryService;
             this.rescueRequestService = rescueRequestService;
             this.commentService = commentService;
+            this.plantConditionService = plantConditionService;
         }
         [AllowAnonymous]
         public async Task<IActionResult> Index(string? searchTerm, int page = 1)
@@ -35,6 +37,7 @@ namespace UrbanPlantRescueApp.Web.Controllers
             ViewBag.Requests = await rescueRequestService.GetRequestsByPlantIdAsync(id);
             ViewBag.Comments = await commentService.GetCommentsByPlantIdAsync(id);
             ViewBag.CommentForm = new CommentFormViewModel { PlantId = id };
+            ViewBag.Conditions = await plantConditionService.GetConditionsByPlantIdAsync(id);
             return View(plant);
         }
         [HttpGet]
