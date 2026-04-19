@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using UrbanPlantRescueApp.Data;
 using UrbanPlantRescueApp.Data.Models;
 using UrbanPlantRescueApp.Services.Interfaces;
-using UrbanPlantRescueApp.Services.ViewModels;
 
 namespace UrbanPlantRescueApp.Services
 {

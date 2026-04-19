@@ -34,6 +34,7 @@ namespace UrbanPlantRescueApp.Web
             builder.Services.AddScoped<IPlantService, PlantService>();
             builder.Services.AddScoped<IRescueRequestService, RescueRequestService>();
             builder.Services.AddScoped<ICommentService, CommentService>();
+            builder.Services.AddScoped<IPlantConditionService, PlantConditionService>();
             builder.Services.AddControllersWithViews();
             WebApplication app = builder.Build();
 

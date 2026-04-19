@@ -19,7 +19,7 @@ namespace UrbanPlantRescueApp.Data
         public DbSet<Plant> Plants { get; set; } = null!;
         public DbSet<RescueRequest> RescueRequests { get; set; } = null!;
         public DbSet<Comment> Comments { get; set; } = null!;
-        public DbSet<PlantCondition> PlantsConditions { get; set; } = null!;
+        public DbSet<PlantCondition> PlantConditions { get; set; } = null!;
         public DbSet<UserProfile> UserProfiles { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
