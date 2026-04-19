@@ -1,0 +1,62 @@
+﻿@model UrbanPlantRescueApp.Services.ViewModels.UserProfileViewModel
+
+@{
+    ViewData["Title"] = "Моят профил";
+}
+
+<div class="row justify-content-center py-4">
+    <div class="col-md-8">
+        <div class="card border-0 shadow p-5" style="border-radius: 24px !important;">
+            <div class="text-center mb-5">
+                <div class="mx-auto mb-3 d-flex align-items-center justify-content-center rounded-circle fw-bold"
+                     style="width: 100px; height: 100px; background: linear-gradient(135deg, #d8f3dc, #b7e4c7); font-size: 2.5rem; color: #2d6a4f;">
+                    @Model.Email.Substring(0, 1).ToUpper()
+                </div>
+                <h2 class="fw-bold mb-1" style="color: #1b4332;">
+                    @(string.IsNullOrEmpty(Model.FirstName) && string.IsNullOrEmpty(Model.LastName)
+                        ? Model.Email
+                        : $"{Model.FirstName} {Model.LastName}")
+                </h2>
+                <p class="text-muted">@Model.Email</p>
+                <a asp-action="Edit" class="btn px-4 py-2 fw-bold"
+                       style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 12px;">
+                    <i class="bi bi-pencil me-2"></i>Редактирай профила
+                </a>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="text-center p-4 rounded-4" style="background-color: #f0f7f4;">
+                        <div style="font-size: 2rem;">🌿</div>
+                        <h3 class="fw-bold mt-2" style="color: #1b4332;">@Model.PlantsCount</h3>
+                        <p class="text-muted small mb-0">Добавени растения</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4 rounded-4" style="background-color: #f0f7f4;">
+                        <div style="font-size: 2rem;">💚</div>
+                        <h3 class="fw-bold mt-2" style="color: #1b4332;">@Model.RescueRequestsCount</h3>
+                        <p class="text-muted small mb-0">Заявки за спасяване</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center p-4 rounded-4" style="background-color: #f0f7f4;">
+                        <div style="font-size: 2rem;">📅</div>
+                        <h3 class="fw-bold mt-2" style="color: #1b4332;">@Model.RegisteredOn.ToString("dd.MM.yyyy")</h3>
+                        <p class="text-muted small mb-0">Член от</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.Bio))
+            {
+                <div class="p-4 rounded-4" style="background-color: #f0f7f4;">
+                    <h5 class="fw-bold mb-2 d-flex align-items-center gap-2" style="color: #2d6a4f;">
+                        <i class="bi bi-person-lines-fill"></i> За мен
+                    </h5>
+                    <p class="text-secondary mb-0" style="line-height: 1.8;">@Model.Bio</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
