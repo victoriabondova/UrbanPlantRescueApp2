@@ -77,9 +77,10 @@ namespace UrbanPlantRescueApp.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/ServerError");
                 app.UseHsts();
             }
+            app.UseStatusCodePagesWithReExecute("/NotFound", "?statusCode={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Страницата не е намерена";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center py-5">
+    <div class="col-md-6 text-center">
+        <div style="font-size: 8rem; line-height: 1;">🌵</div>
+        <h1 class="fw-bold mt-3" style="font-size: 5rem; color: #2d6a4f;">404</h1>
+        <h2 class="fw-bold mb-3" style="color: #1b4332;">Страницата не е намерена</h2>
+        <div class="d-flex justify-content-center gap-3">
+            <a asp-controller="Home" asp-action="Index"
+                   class="btn btn-lg fw-bold px-5 py-3"
+                   style="background: linear-gradient(135deg, #2d6a4f, #40916c); color: white; border: none; border-radius: 14px;">
+                <i class="bi bi-house me-2"></i>Към началото
+            </a>
+            <a asp-controller="Plant" asp-action="Index"
+                   class="btn btn-lg fw-bold px-5 py-3"
+                   style="border: 2px solid #d8ede5; border-radius: 14px; color: #2d6a4f; background: white;">
+                <i class="bi bi-flower2 me-2"></i>Към растенията
+            </a>
+        </div>
+    </div>
+</div>

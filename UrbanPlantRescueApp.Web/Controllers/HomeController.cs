@@ -27,5 +27,15 @@ namespace UrbanPlantRescueApp.Web.Controllers
                 RequestId = System.Diagnostics.Activity.Current?.Id ?? HttpContext.TraceIdentifier
             });
         }
+        [Route("/NotFound")]
+        public IActionResult PageNotFound()
+        {
+            return View("NotFound");
+        }
+        [Route("/ServerError")]
+        public IActionResult ServerError()
+        {
+            return View("ServerError");
+        }
     }
 }
