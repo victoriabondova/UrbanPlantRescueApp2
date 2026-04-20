@@ -183,15 +183,15 @@
 
 ### Детайли за Растение(без логнат потребител)
 ![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsNotlogin.png)
-(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsNotlogin2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsNotlogin2.png)
 
 ### Детайли за Растение(с логнат потребител - собственик)
 ![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetails.png)
-(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetails2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetails2.png)
 
 ### Детайли за Растение(с логнат потребител - друг потебител)
 ![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsOther.png)
-(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsOther2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsOther2.png)
 
 ### Редактиране на Растение
 ![Plant Edit Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantEdit.png)
