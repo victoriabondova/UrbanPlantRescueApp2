@@ -37,10 +37,10 @@
 
 ## 🏗️ Архитектура
 Проектът следва архитектурния модел **Model-View-Controller (MVC)** и е разделен на 4 логически слоя:
-| **UrbanPlantRescueApp.Data** | Entity модели, DbContext, Entity конфигурации, миграции и валидационни константи |
-| **UrbanPlantRescueApp.Services** | Бизнес логика, сервизни интерфейси и ViewModels |
-| **UrbanPlantRescueApp.Web** | MVC контролери, Razor Views, Areas, Program.cs и статични файлове |
-| **UrbanPlantRescueApp.Tests** | Unit тестове с xUnit (26 теста) |
+* **UrbanPlantRescueApp.Data** - Entity модели, DbContext, Entity конфигурации, миграции и валидационни константи
+* **UrbanPlantRescueApp.Services** - Бизнес логика, сервизни интерфейси и ViewModels
+* **UrbanPlantRescueApp.Web** - MVC контролери, Razor Views, Areas, Program.cs и статични файлове
+* **UrbanPlantRescueApp.Tests** - Unit тестове с xUnit (26 теста)
 ### 1.Entity модели
 * **Plant** — Растение с име, описание, снимка, категория и собственик
 * **Category** — Категория за класификация на растенията
