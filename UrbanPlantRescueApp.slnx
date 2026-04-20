@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="UrbanPlantRescueApp.Data/UrbanPlantRescueApp.Data.csproj" />
   <Project Path="UrbanPlantRescueApp.Services/UrbanPlantRescueApp.Services.csproj" />
+  <Project Path="UrbanPlantRescueApp.Tests/UrbanPlantRescueApp.Tests.csproj" Id="396b4f5d-ce72-4c3d-b475-ff482b863813" />
   <Project Path="UrbanPlantRescueApp.Web/UrbanPlantRescueApp.Web.csproj" />
 </Solution>
