@@ -94,7 +94,7 @@
 * Защита срещу дублиращи се категории
 ### 📩 Заявки за спасяване
 * Логнатите потребители могат да изпращат заявки за спасяване на конкретни растения
-* Проследяване на статуса на заявката (Pending / Approved)
+* Проследяване на статуса на заявката (В изчакване / Одобрено)
 * Admin може да одобрява заявките от Admin панела
 * Собственикът не може да заявява спасяване на собственото си растение
 ### 💬 Коментари
@@ -103,15 +103,15 @@
 * Показване на автора и датата на коментара
 ### 🌡️ Състояние на растението
 * Собственикът и Admin могат да докладват текущото състояние на растението
-* Пет нива на състояние: Critical, Poor, Stable, Good, Recovered
+* Пет нива на състояние: Критично, Лошо, Стабилно, Добро, Възстановено
 * Цветово кодирани статуси за по-добра визуализация
 ### 👤 Потребителски профил
-* Персонализиран профил с име, фамилия и биография
+* Персонализиран профил с име, фамилия, биография и дата на създаване на профила
 * Статистика за добавени растения и заявки за спасяване
 * Достъпен чрез клик върху потребителското име в навигацията
 ### 🔍 Търсене и Pagination
 * Търсене по име, описание и категория на растението
-* Страниране на резултатите по 6 растения на страница
+* Pagination на резултатите по 6 растения на страница
 * Запазване на search term при смяна на страница
 ### 🛡️ Admin Area
 * Отделна зона достъпна само за Administrator
@@ -146,70 +146,73 @@
 
 ## 📸 Екрани снимки (Галерия)
 ### Начална Страница(без логнат потрербител)
-![Home Page](./wwwroot/images/screenshots/home.png)
+![Home Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/home.png)
 
 ### Начална Страница(с логнат потребител)
-![Home Page](./wwwroot/images/screenshots/homeLogin.png)
+![Home Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/homeLogin.png)
 
 ### Страница за политика на поверителност
-![Privacy Policy Page](./wwwroot/images/screenshots/privacyPolicy.png)
+![Privacy Policy Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/privacyPolicy.png)
 
 ### Страница за регистрация
-![Register Page](./wwwroot/images/screenshots/register.png)
+![Register Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/register.png)
 
 ### Страница за вход
-![Login Page](./wwwroot/images/screenshots/login.png)
+![Login Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/login.png)
 
 ### Категории(без логнат потребител)
-![Categories Page](./wwwroot/images/screenshots/categories.png)
+![Categories Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/categories.png)
 
 ### Категории(с логнат потребител)
-![Categories Page](./wwwroot/images/screenshots/categoriesLogin.png)
+![Categories Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/categoriesLogin.png)
 
 ### Избрана категория
-![Categories Page](./wwwroot/images/screenshots/selectedcategories.png)
+![Categories Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/selectedcategories.png)
 
 ### Добавяне на категории
-![Categories Add Page](./wwwroot/images/screenshots/addCategories.png)
+![Categories Add Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/addCategories.png)
 
 ### Списък с Растения(без логнат потребител)
-![Plant Index](./wwwroot/images/screenshots/plants.png)
+![Plant Index](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plants.png)
 
 ### Списък с Растения(с логнат потребител)
-![Plant Index](./wwwroot/images/screenshots/plantslogin.png)
+![Plant Index](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantslogin.png)
 
 ### Добавяне на Растение
-![Plant Add Page](./wwwroot/images/screenshots/addPlants.png)
+![Plant Add Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/addPlants.png)
 
 ### Детайли за Растение(без логнат потребител)
-![Plant Details Page](./wwwroot/images/screenshots/plantDetailsNotlogin.png)(./wwwroot/images/screenshots/plantDetailsNotlogin2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsNotlogin.png)
+(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsNotlogin2.png)
 
 ### Детайли за Растение(с логнат потребител - собственик)
-![Plant Details Page](./wwwroot/images/screenshots/plantDetails.png)(./wwwroot/images/screenshots/plantDetails2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetails.png)
+(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetails2.png)
 
 ### Детайли за Растение(с логнат потребител - друг потебител)
-![Plant Details Page](./wwwroot/images/screenshots/plantDetailsOther.png)(./wwwroot/images/screenshots/plantDetailsOther2.png)
+![Plant Details Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsOther.png)
+(./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDetailsOther2.png)
 
 ### Редактиране на Растение
-![Plant Edit Page](./wwwroot/images/screenshots/plantEdit.png)
+![Plant Edit Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantEdit.png)
 
 ### Изтриване на Растение и заявките му
-![Plant Delete Page](./wwwroot/images/screenshots/plantDelete.png)
+![Plant Delete Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/plantDelete.png)
 
 ### Профил на потребител
-![UserProfile Page](./wwwroot/images/screenshots/userProfile.png)
+![UserProfile Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/userProfile.png)
 
 ### Редактиране на потребителски профил
-![UserProfile Edit Page](./wwwroot/images/screenshots/userProfileEdit.png)
+![UserProfile Edit Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/userProfileEdit.png)
 
 ### Административен панел за заявки за спасяване
-![Admin Area Page](./wwwroot/images/screenshots/adminArea.png)
+![Admin Area Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/adminArea.png)
 
 ### Страница на грешка 404
-![Not Found Page](./wwwroot/images/screenshots/pageNotFound.png)
+![Not Found Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/pageNotFound.png)
 
 ### Страница на грешка 500
-![Server Error Page](./wwwroot/images/screenshots/pageServerError.png)
+![Server Error Page](./UrbanPlantRescueApp.Web/wwwroot/images/screenshots/pageServerError.png)
 
 ---
 
