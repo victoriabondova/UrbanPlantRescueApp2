@@ -3,7 +3,7 @@
 ## 📖 За проекта
 **Urban Plant Rescue App** е уеб базирано приложение, създадено с **ASP.NET Core 8**, което има за цел да свързва любителите на растенията и да помага 
 за спасяването на градската флора. Потребителите могат да докладват за растения в нужда, да подават заявки за тяхното спасяване, да коментират и да следят тяхното състояние.  
-Проектът демонстрира умения за работа с релационни бази данни, сигурност, CRUD операции и модерен UI дизайн.
+Проектът демонстрира умения за работа с релационни бази данни, сигурност, CRUD операции и модерен UI дизайн. Това приложение е подобрената версия от ASP.NET Fundamentals.
 
 ---
 
@@ -224,9 +224,9 @@
 ### Стъпки
 1. Клонирай репото:
 ```bash
-git clone https://github.com/victoriabondova/UrbanPlantRescueApp2.git
+git clone [https://github.com/victoriabondova/UrbanPlantRescueApp2.git](https://github.com/victoriabondova/UrbanPlantRescueApp2.git)
 ```
-2. Конфигурирай connection string в `appsettings.json`:
+2. Конфигурирай connection string в `UrbanPlantRescueApp.Web/appsettings.json`:
 ```json
 {
   "ConnectionStrings": {
